@@ -1,12 +1,16 @@
 {
-  "name": "chacal/datawash",
-  "description": "Biblioteca para uso da api DataWash",
-  "minimum-stability": "stable",
-  "license": "proprietary",
-  "authors": [
+  "name" : "chacal/consulta-datawash",
+  "description" : "Consulta para Datawash",
+  "license" : "MIT",
+  "homepage" : "https://github.com/chacal88/consulta-datawash",
+  "type": "project",
+  "minimum-stability": "dev",
+  "authors" : [
     {
-      "name": "Kaue Rodrigues",
-      "email": "kauemsc@gmail.com"
+      "name" : "Kaue Rodrigues",
+      "email" : "kauemsc@gmail.com",
+      "homepage" : "https://github.com/chacal88",
+      "role" : "Developer"
     }
   ],
   "require": {
@@ -16,7 +20,8 @@
   },
   "autoload": {
     "psr-4": {
-      "DataWash\\": "src/"
+      "DataWash\\": "src/",
+      "psr/log": "^1.0"
     }
   }
 }
