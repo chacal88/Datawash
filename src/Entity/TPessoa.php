@@ -4,7 +4,7 @@
 namespace DataWash\Entity;
 
 
-use DataWash\Lib\Collection;
+use Common\Lib\Collection;
 
 trait TPessoa
 {
@@ -12,7 +12,7 @@ trait TPessoa
 
     public function __construct()
     {
-        $this->enderecos = new Collection();
+        $this->enderecos = new \Common\Lib\Collection();
         $this->telefones = new Collection();
         $this->emails = new Collection();
     }
@@ -100,7 +100,8 @@ trait TPessoa
      */
     public function addEndereco(Endereco $endereco)
     {
-        $this->enderecos[] = $endereco;
+        $this->enderecos ?? $this->enderecos =new Collection();
+        $this->enderecos->add($endereco);
     }
 
     /**
@@ -124,7 +125,8 @@ trait TPessoa
      */
     public function addTelefone(Telefone $telefone)
     {
-        $this->telefones[] = $telefone;
+        $this->telefones ?? $this->telefones = new Collection();
+        $this->telefones->add($telefone);
     }
 
     /**
@@ -148,7 +150,8 @@ trait TPessoa
      */
     public function addEmail(Email $email)
     {
-        $this->emails[] = $email;
+        $this->emails ?? $this->emails = new Collection();
+        $this->emails->add($email);
     }
 
 }

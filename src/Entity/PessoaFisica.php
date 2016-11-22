@@ -4,7 +4,7 @@
 namespace DataWash\Entity;
 
 
-use DataWash\Lib\Collection;
+use Common\Lib\Collection;
 
 class PessoaFisica
 {
@@ -218,7 +218,8 @@ class PessoaFisica
      */
     public function addParticacao(Participacao $participacao)
     {
-        $this->partipacoes[] = $participacao;
+        $this->partipacoes ?? $this->partipacoes = new Collection();
+        $this->partipacoes->add($participacao);
     }
 
 } 

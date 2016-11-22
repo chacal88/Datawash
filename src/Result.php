@@ -156,8 +156,8 @@ class Result
                     $piece = null;
                 }
             }
-            
-            if ($piece !== null && ! ($piece instanceof AbstractModel) && ! ($piece instanceof \SoapFault)) {
+
+            if ($piece !== null && ! ($piece instanceof PessoaJuridica )&& ! ($piece instanceof PessoaFisica) && ! ($piece instanceof \SoapFault)) {
                 throw new InvalidArgumentException('O resultado deve ser uma instância de DataWash\Entity\PessoaFisica ou um ' . 'DataWash\Entity\PessoaJuridica ou uma instância de \SoapFault.');
             }
             
