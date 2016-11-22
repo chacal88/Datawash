@@ -1,0 +1,22 @@
+{
+  "name": "chacal/datawash",
+  "description": "Biblioteca para uso da api DataWash",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Kaue Rodrigues",
+      "email": "kauemsc@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "respect/validation": "^1.1",
+    "chacal/common": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "DataWash\\": "src/"
+    }
+  }
+}
