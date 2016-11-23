@@ -1,8 +1,12 @@
 <?php
-
+/**
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
+ */
 
 namespace DataWash\Entity;
-
 
 /**
  * Class Cnpj
@@ -69,12 +73,10 @@ class PessoaJuridica
      */
     protected $naturezaJuridica;
 
-
     /**
      * @var string
      */
     protected $descricaoNaturezaJuridica;
-
 
     /**
      * @var int
@@ -91,10 +93,12 @@ class PessoaJuridica
 
     /**
      * @param int $cnpj
+     * @return PessoaJuridica
      */
     public function setCnpj($cnpj)
     {
         $this->cnpj = $cnpj;
+        return $this;
     }
 
     /**
@@ -107,10 +111,12 @@ class PessoaJuridica
 
     /**
      * @param string $razaoSocial
+     * @return PessoaJuridica
      */
     public function setRazaoSocial($razaoSocial)
     {
         $this->razaoSocial = $razaoSocial;
+        return $this;
     }
 
     /**
@@ -123,10 +129,12 @@ class PessoaJuridica
 
     /**
      * @param string $fantasia
+     * @return PessoaJuridica
      */
     public function setFantasia($fantasia)
     {
         $this->fantasia = $fantasia;
+        return $this;
     }
 
     /**
@@ -139,10 +147,12 @@ class PessoaJuridica
 
     /**
      * @param \DateTime $dataAbertura
+     * @return PessoaJuridica
      */
     public function setDataAbertura($dataAbertura)
     {
         $this->dataAbertura = $dataAbertura;
+        return $this;
     }
 
     /**
@@ -155,10 +165,12 @@ class PessoaJuridica
 
     /**
      * @param string $situacaoCadastral
+     * @return PessoaJuridica
      */
     public function setSituacaoCadastral($situacaoCadastral)
     {
         $this->situacaoCadastral = $situacaoCadastral;
+        return $this;
     }
 
     /**
@@ -171,10 +183,12 @@ class PessoaJuridica
 
     /**
      * @param \DateTime $dataSituacaoCadastral
+     * @return PessoaJuridica
      */
     public function setDataSituacaoCadastral($dataSituacaoCadastral)
     {
         $this->dataSituacaoCadastral = $dataSituacaoCadastral;
+        return $this;
     }
 
     /**
@@ -187,10 +201,12 @@ class PessoaJuridica
 
     /**
      * @param int $cnae
+     * @return PessoaJuridica
      */
     public function setCnae($cnae)
     {
         $this->cnae = $cnae;
+        return $this;
     }
 
     /**
@@ -203,10 +219,12 @@ class PessoaJuridica
 
     /**
      * @param string $cnaeDescriacao
+     * @return PessoaJuridica
      */
     public function setCnaeDescriacao($cnaeDescriacao)
     {
         $this->cnaeDescriacao = $cnaeDescriacao;
+        return $this;
     }
 
     /**
@@ -219,10 +237,12 @@ class PessoaJuridica
 
     /**
      * @param int $cnaeSecundario
+     * @return PessoaJuridica
      */
     public function setCnaeSecundario($cnaeSecundario)
     {
         $this->cnaeSecundario = $cnaeSecundario;
+        return $this;
     }
 
     /**
@@ -235,10 +255,12 @@ class PessoaJuridica
 
     /**
      * @param string $cnaeSecundarioDescricao
+     * @return PessoaJuridica
      */
     public function setCnaeSecundarioDescricao($cnaeSecundarioDescricao)
     {
         $this->cnaeSecundarioDescricao = $cnaeSecundarioDescricao;
+        return $this;
     }
 
     /**
@@ -251,10 +273,12 @@ class PessoaJuridica
 
     /**
      * @param int $naturezaJuridica
+     * @return PessoaJuridica
      */
     public function setNaturezaJuridica($naturezaJuridica)
     {
         $this->naturezaJuridica = $naturezaJuridica;
+        return $this;
     }
 
     /**
@@ -267,10 +291,12 @@ class PessoaJuridica
 
     /**
      * @param string $descricaoNaturezaJuridica
+     * @return PessoaJuridica
      */
     public function setDescricaoNaturezaJuridica($descricaoNaturezaJuridica)
     {
         $this->descricaoNaturezaJuridica = $descricaoNaturezaJuridica;
+        return $this;
     }
 
     /**
@@ -283,11 +309,12 @@ class PessoaJuridica
 
     /**
      * @param int $capitalSocial
+     * @return PessoaJuridica
      */
     public function setCapitalSocial($capitalSocial)
     {
         $this->capitalSocial = $capitalSocial;
+        return $this;
     }
-
 
 }

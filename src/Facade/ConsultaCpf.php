@@ -1,39 +1,68 @@
 <?php
+/**
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
+ */
+
 namespace DataWash\Facade;
 
+use Common\Lib\DateCreate;
 use DataWash\Entity\Email;
 use DataWash\Entity\Endereco;
 use DataWash\Entity\Ocupacao;
 use DataWash\Entity\Participacao;
 use DataWash\Entity\PessoaFisica;
 use DataWash\Entity\Telefone;
+use DataWash\Lib\Enum\TelefoneEnum;
 use DataWash\Result;
 
 
 /**
+ * Class ConsultaCpf
  *
- * @author : Kaue Rodrigues
+ * @author Kaue Rodrigues <kauemsc@gmail.com>
+ *
+ * @package DataWash\Facade
  */
 class ConsultaCpf
 {
 
+    /**
+     * @var Result
+     */
+    private $result;
+
+    /**
+     * ConsultaCpf constructor.
+     */
+    public function __construct()
+    {
+        $this->result = new Result();
+    }
+
+
+    /**
+     * parse
+     *
+     * @param $r
+     * @return Result
+     */
     public function parse($r)
     {
-        $errorCode = null;
-        $errorMsg = null;
-        $result = new Result();
+        $this->result->setErrorCode(null);
+        $this->result->setErrorMsg(null);
 
         if (!$r) {
 
-            $errorCode = 0;
+            $this->result->setErrorCode(0);
         } else {
             if ($r instanceof \SoapFault) {
 
-                $errorCode = $r->getCode();
-
-                $errorMsg = $r->getMessage();
-
-                $result->setSoapFault($r);
+                $this->result->setErrorCode($r->getCode());
+                $this->result->setErrorMsg($r->getMessage());
+                $this->result->setSoapFault($r);
             } else {
                 if ($r instanceof \stdClass) {
                     if (property_exists($r, 'ConsultaCPFCompletaResult') && $r->ConsultaCPFCompletaResult instanceof \stdClass) {
@@ -45,7 +74,7 @@ class ConsultaCpf
                         $pessoaFisica->setMensagem((string)$parse->Mensagem);
                         $pessoaFisica->setCpf((string)$parse->DADOS->CPF);
                         $pessoaFisica->setBeneficio((string)$parse->DADOS->BENEFICIO->FAIXA_BENEFICIO);
-                        $pessoaFisica->setDataNascimento((string)$parse->DADOS->DATA_NASC);
+                        $pessoaFisica->setDataNascimento(DateCreate::created($parse->DADOS->DATA_NASC));
                         $pessoaFisica->setEscolaridade((string)$parse->DADOS->ESCOLARIDADE);
                         $pessoaFisica->setNome((string)$parse->DADOS->NOME);
                         $pessoaFisica->setNomeMae((string)$parse->DADOS->NOME_MAE);
@@ -63,14 +92,11 @@ class ConsultaCpf
                             foreach ($parse->DADOS->TELEFONES_FIXOS->TELEFONE as $value) {
 
                                 $telefone = new Telefone();
-
                                 $pattern = '/\d{2}(\d{4}\d*)/';
                                 $telefone->setNumero(preg_replace($pattern, '$1', (string)$value));
-
                                 $pattern = '/(\d{2})\d{4}\d*/';
                                 $telefone->setDdd(preg_replace($pattern, '$1', (string)$value));
-                                $telefone->setTipo(\DataWash\Lib\Enum\TelefoneEnum::RESIDENCIAL);
-
+                                $telefone->setTipo(TelefoneEnum::RESIDENCIAL);
                                 $pessoaFisica->addTelefone($telefone);
                             }
                         }
@@ -79,14 +105,11 @@ class ConsultaCpf
                             foreach ($parse->DADOS->TELEFONES_MOVEIS->TELEFONE as $value) {
 
                                 $telefone = new Telefone();
-
                                 $pattern = '/\d{2}(\d{4}\d*)/';
                                 $telefone->setNumero(preg_replace($pattern, '$1', (string)$value));
-
                                 $pattern = '/(\d{2})/';
                                 $telefone->setDdd(preg_replace($pattern, '$1', (string)$value));
-                                $telefone->setTipo(\DataWash\Lib\Enum\TelefoneEnum::CELULAR);
-
+                                $telefone->setTipo(TelefoneEnum::CELULAR);
                                 $pessoaFisica->addTelefone($telefone);
                             }
                         }
@@ -123,26 +146,24 @@ class ConsultaCpf
                                 $participacao = new Participacao();
                                 $participacao->setCargo((string)$value->PARTICIPACAO->CARGO);
                                 $participacao->setCnpj((string)$value->PARTICIPACAO->CNPJ);
-                                $participacao->setDataEntrada((string)$value->PARTICIPACAO->DATA_ENTRADA);
+                                $participacao->setDataEntrada(DateCreate::created($value->PARTICIPACAO->DATA_ENTRADA));
                                 $participacao->setParticipacao((string)$value->PARTICIPACAO->PARTICIPACAO);
                                 $participacao->setRazaoSocial((string)$value->PARTICIPACAO->RAZAO_SOCIAL);
                                 $pessoaFisica->addParticipacao($participacao);
                             }
                         }
 
-                        $result->setResult($pessoaFisica);
+                        $this->result->setResult($pessoaFisica);
                     } else {
-                        $errorCode = 0;
-                        $errorMsg = "Resposta em branco. Confirme se o Cpf realmente existe.";
+                        $this->result->setErrorCode(0);
+                        $this->result->setErrorMsg("Resposta em branco. Confirme se o Cpf realmente existe.");
                     }
                 } else {
-                    $errorCode = 0;
-                    $errorMsg = "A resposta não está no formato esperado.";
+                    $this->result->setErrorCode(0);
+                    $this->result->setErrorMsg("A resposta não está no formato esperado.");
                 }
             }
         }
-        $result->setErrorCode($errorCode);
-        $result->setErrorMsg($errorMsg);
-        return $result;
+        return $this->result;
     }
 }

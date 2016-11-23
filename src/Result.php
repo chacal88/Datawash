@@ -1,15 +1,24 @@
 <?php
 /**
- * prestashop Project ${PROJECT_URL}
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
  *
- * @link      ${GITHUB_URL} Source code
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
  */
+
 namespace DataWash;
 
 use DataWash\Entity\PessoaFisica;
 use DataWash\Entity\PessoaJuridica;
 use Psr\Log\InvalidArgumentException;
 
+/**
+ * Class Result
+ *
+ * @author Kaue Rodrigues <kauemsc@gmail.com>
+ *
+ * @package DataWash
+ */
 class Result
 {
 
@@ -43,26 +52,33 @@ class Result
      */
     protected $soapFault;
 
+    /**
+     * hasError
+     *
+     * @return bool
+     */
     public function hasError()
     {
         return ($this->errorCode !== null || $this->errorMsg !== null || $this->isSoapFault);
     }
 
     /**
+     * setIsSoapFault
      *
-     * @param boolean $isSoapFault            
-     * @return $this;
+     * @param $isSoapFault
+     * @return $this
      */
     public function setIsSoapFault($isSoapFault)
     {
         $this->isSoapFault = $isSoapFault;
-        
+
         return $this;
     }
 
     /**
+     * getIsSoapFault
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsSoapFault()
     {
@@ -70,18 +86,20 @@ class Result
     }
 
     /**
+     * setErrorCode
      *
-     * @param int $errorCode            
-     * @return $this;
+     * @param $errorCode
+     * @return $this
      */
     public function setErrorCode($errorCode)
     {
         $this->errorCode = $errorCode;
-        
+
         return $this;
     }
 
     /**
+     * getErrorCode
      *
      * @return int
      */
@@ -91,18 +109,20 @@ class Result
     }
 
     /**
+     * setErrorMsg
      *
-     * @param string $errorMsg            
-     * @return $this;
+     * @param $errorMsg
+     * @return $this
      */
     public function setErrorMsg($errorMsg)
     {
         $this->errorMsg = $errorMsg;
-        
+
         return $this;
     }
 
     /**
+     * getErrorMsg
      *
      * @return string
      */
@@ -112,19 +132,22 @@ class Result
     }
 
     /**
+     * setSoapFault
      *
-     * @param \SoapFault $soapFault            
-     * @return $this;
+     * @param \SoapFault $soapFault
+     * @return $this
      */
     public function setSoapFault(\SoapFault $soapFault)
     {
         $this->soapFault = $soapFault;
+
         $this->setIsSoapFault(true);
-        
+
         return $this;
     }
 
     /**
+     * getSoapFault
      *
      * @return \SoapFault
      */
@@ -134,42 +157,51 @@ class Result
     }
 
     /**
+     * setResult
      *
-     * @param PessoaFisica|PessoaJuridica|\SoapFault $result
-     * @throws InvalidArgument
-     * @return $this;
+     * @param $result
+     * @return $this
      */
     public function setResult($result)
     {
         if ($result instanceof \SoapFault) {
+
             $this->setIsSoapFault(true);
             $this->setErrorCode($result->getCode());
             $this->setErrorMsg($result->getMessage());
-            $this->result = null;
+            $this->setResult(null);
             $this->setSoapFault($result);
+
         } else {
+
             $piece = $result;
+
             if (is_array($result)) {
+
                 if (count($result)) {
+
                     $piece = reset($result);
                 } else {
+
                     $piece = null;
                 }
             }
 
-            if ($piece !== null && ! ($piece instanceof PessoaJuridica )&& ! ($piece instanceof PessoaFisica) && ! ($piece instanceof \SoapFault)) {
+            if ($piece !== null && !($piece instanceof PessoaJuridica) && !($piece instanceof PessoaFisica) && !($piece instanceof \SoapFault)) {
+
                 throw new InvalidArgumentException('O resultado deve ser uma instância de DataWash\Entity\PessoaFisica ou um ' . 'DataWash\Entity\PessoaJuridica ou uma instância de \SoapFault.');
             }
-            
+
             $this->result = $result;
         }
-        
+
         return $this;
     }
 
     /**
+     * getResult
      *
-     * @return PessoaJuridica|PessoaFisica
+     * @return PessoaFisica|PessoaJuridica
      */
     public function getResult()
     {

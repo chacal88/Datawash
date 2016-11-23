@@ -1,11 +1,19 @@
 <?php
-
+/**
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
+ */
 
 namespace DataWash\Entity;
 
 /**
  * Class Endereco
- * @package DataWash\Model
+ *
+ * @author Kaue Rodrigues <kauemsc@gmail.com>
+ *
+ * @package DataWash\Entity
  */
 class Endereco
 {
@@ -46,6 +54,8 @@ class Endereco
     protected $cep;
 
     /**
+     * getTipoLogradouro
+     *
      * @return string
      */
     public function getTipoLogradouro()
@@ -54,8 +64,10 @@ class Endereco
     }
 
     /**
-     * @param string $tipoLogradouro
-     * @return Endereco
+     * setTipoLogradouro
+     *
+     * @param $tipoLogradouro
+     * @return $this
      */
     public function setTipoLogradouro($tipoLogradouro)
     {
@@ -64,6 +76,8 @@ class Endereco
     }
 
     /**
+     * getLogradouro
+     *
      * @return string
      */
     public function getLogradouro()
@@ -72,8 +86,10 @@ class Endereco
     }
 
     /**
-     * @param string $logradouro
-     * @return Endereco
+     * setLogradouro
+     *
+     * @param $logradouro
+     * @return $this
      */
     public function setLogradouro($logradouro)
     {
@@ -82,6 +98,8 @@ class Endereco
     }
 
     /**
+     * getNumero
+     *
      * @return string
      */
     public function getNumero()
@@ -90,8 +108,10 @@ class Endereco
     }
 
     /**
-     * @param string $numero
-     * @return Endereco
+     * setNumero
+     *
+     * @param $numero
+     * @return $this
      */
     public function setNumero($numero)
     {
@@ -100,6 +120,8 @@ class Endereco
     }
 
     /**
+     * getBairro
+     *
      * @return string
      */
     public function getBairro()
@@ -108,8 +130,10 @@ class Endereco
     }
 
     /**
-     * @param string $bairro
-     * @return Endereco
+     * setBairro
+     *
+     * @param $bairro
+     * @return $this
      */
     public function setBairro($bairro)
     {
@@ -118,6 +142,8 @@ class Endereco
     }
 
     /**
+     * getCidade
+     *
      * @return string
      */
     public function getCidade()
@@ -126,8 +152,10 @@ class Endereco
     }
 
     /**
-     * @param string $cidade
-     * @return Endereco
+     * setCidade
+     *
+     * @param $cidade
+     * @return $this
      */
     public function setCidade($cidade)
     {
@@ -136,6 +164,8 @@ class Endereco
     }
 
     /**
+     * getUf
+     *
      * @return string
      */
     public function getUf()
@@ -144,8 +174,10 @@ class Endereco
     }
 
     /**
-     * @param string $uf
-     * @return Endereco
+     * setUf
+     *
+     * @param $uf
+     * @return $this
      */
     public function setUf($uf)
     {
@@ -154,6 +186,8 @@ class Endereco
     }
 
     /**
+     * getCep
+     *
      * @return string
      */
     public function getCep()
@@ -162,8 +196,10 @@ class Endereco
     }
 
     /**
-     * @param string $cep
-     * @return Endereco
+     * setCep
+     *
+     * @param $cep
+     * @return $this
      */
     public function setCep($cep)
     {

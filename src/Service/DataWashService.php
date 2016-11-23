@@ -1,7 +1,12 @@
 <?php
+/**
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
+ */
 
 namespace DataWash\Service;
-
 
 use DataWash\Entity\PessoaFisica;
 use DataWash\Entity\PessoaJuridica;
@@ -11,7 +16,6 @@ use DataWash\Lib\Enum\DataWashEnum;
 use DataWash\Result;
 use Respect\Validation\Exceptions\AllOfException;
 use Respect\Validation\Validator as v;
-
 
 /**
  * Class Datawash
@@ -38,19 +42,24 @@ class DataWashService
     private $senha;
 
     /**
-     * Datawash constructor.
+     * DataWashService constructor.
+     * @param \SoapClient $soap
+     * @param $cliente
+     * @param $usuario
+     * @param $senha
      */
     public function __construct(\SoapClient $soap, $cliente, $usuario, $senha)
     {
-        $this->soap = $soap;
+        $this->soap    = $soap;
         $this->cliente = $cliente;
         $this->usuario = $usuario;
-        $this->senha = $senha;
+        $this->senha   = $senha;
     }
 
     /**
+     * ConsultaCNPJ
+     *
      * @param $cnpj
-     * @param $tipo
      * @return PessoaJuridica
      */
     public function ConsultaCNPJ($cnpj)
@@ -59,17 +68,21 @@ class DataWashService
         /** @var $result PessoaJuridica */
 
         try {
+
             v::cnpj()->assert($cnpj);
+
         } catch (AllOfException $e) {
+
             throw new \InvalidArgumentException(sprintf('Cnpj %s inválido', $cnpj), 500, $e);
+
         }
 
         $arguments = array(
-            __FUNCTION__ => array(
+            __FUNCTION__  => array(
                 'Cliente' => $this->cliente,
                 'Usuario' => $this->usuario,
-                'Senha' => $this->senha,
-                'CNPJ' => $cnpj
+                'Senha'   => $this->senha,
+                'CNPJ'    => $cnpj
             )
         );
 
@@ -77,16 +90,18 @@ class DataWashService
             'location' => DataWashEnum::DATAWASH
         );
 
-        $result = $this->soap->__soapCall(__FUNCTION__, $arguments, $options);
+        $result       = $this->soap->__soapCall(__FUNCTION__, $arguments, $options);
         $consultaCnpj = new ConsultaCnpj();
-        $data = $consultaCnpj->parse($result);
-        $result = $data->getResult();
+        $data         = $consultaCnpj->parse($result);
+        $result       = $data->getResult();
 
         return $result;
 
     }
 
     /**
+     * ConsultaCPFCompleta
+     *
      * @param $cpf
      * @return PessoaFisica
      */
@@ -103,11 +118,11 @@ class DataWashService
 
 
         $arguments = [
-            __FUNCTION__ => [
+            __FUNCTION__  => [
                 'Cliente' => $this->cliente,
                 'Usuario' => $this->usuario,
-                'Senha' => $this->senha,
-                'CPF' => $cpf
+                'Senha'   => $this->senha,
+                'CPF'     => $cpf
             ]
         ];
 
@@ -115,10 +130,10 @@ class DataWashService
             'location' => DataWashEnum::DATAWASH
         );
 
-        $result = $this->soap->__soapCall(__FUNCTION__, $arguments, $options);
+        $result      = $this->soap->__soapCall(__FUNCTION__, $arguments, $options);
         $consultaCpf = new ConsultaCpf();
-        $data = $consultaCpf->parse($result);
-        $result = $data->getResult();
+        $data        = $consultaCpf->parse($result);
+        $result      = $data->getResult();
 
         return $result;
 

@@ -1,18 +1,31 @@
 <?php
-
+/**
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
+ */
 
 namespace DataWash\Entity;
 
-
 use Common\Lib\Collection;
 
+/**
+ * Class TPessoa
+ *
+ * @author Kaue Rodrigues <kauemsc@gmail.com>
+ *
+ * @package DataWash\Entity
+ */
 trait TPessoa
 {
 
-
+    /**
+     * TPessoa constructor.
+     */
     public function __construct()
     {
-        $this->enderecos = new \Common\Lib\Collection();
+        $this->enderecos = new Collection();
         $this->telefones = new Collection();
         $this->emails = new Collection();
     }
@@ -57,10 +70,12 @@ trait TPessoa
 
     /**
      * @param int $codigo
+     * @return TPessoa
      */
     public function setCodigo($codigo)
     {
         $this->codigo = $codigo;
+        return $this;
     }
 
     /**
@@ -73,10 +88,12 @@ trait TPessoa
 
     /**
      * @param int $mensagem
+     * @return TPessoa
      */
     public function setMensagem($mensagem)
     {
         $this->mensagem = $mensagem;
+        return $this;
     }
 
     /**
@@ -89,19 +106,12 @@ trait TPessoa
 
     /**
      * @param Collection $enderecos
+     * @return TPessoa
      */
     public function setEnderecos($enderecos)
     {
         $this->enderecos = $enderecos;
-    }
-
-    /**
-     * @param Endereco $endereco
-     */
-    public function addEndereco(Endereco $endereco)
-    {
-        $this->enderecos ?? $this->enderecos =new Collection();
-        $this->enderecos->add($endereco);
+        return $this;
     }
 
     /**
@@ -114,19 +124,12 @@ trait TPessoa
 
     /**
      * @param Collection $telefones
+     * @return TPessoa
      */
     public function setTelefones($telefones)
     {
         $this->telefones = $telefones;
-    }
-
-    /**
-     * @param Telefone $telefone
-     */
-    public function addTelefone(Telefone $telefone)
-    {
-        $this->telefones ?? $this->telefones = new Collection();
-        $this->telefones->add($telefone);
+        return $this;
     }
 
     /**
@@ -139,10 +142,30 @@ trait TPessoa
 
     /**
      * @param Collection $emails
+     * @return TPessoa
      */
     public function setEmails($emails)
     {
         $this->emails = $emails;
+        return $this;
+    }
+
+    /**
+     * @param Endereco $endereco
+     */
+    public function addEndereco(Endereco $endereco)
+    {
+        $this->enderecos ?? $this->enderecos = new Collection();
+        $this->enderecos->add($endereco);
+    }
+
+    /**
+     * @param Telefone $telefone
+     */
+    public function addTelefone(Telefone $telefone)
+    {
+        $this->telefones ?? $this->telefones = new Collection();
+        $this->telefones->add($telefone);
     }
 
     /**

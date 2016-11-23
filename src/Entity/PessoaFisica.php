@@ -1,11 +1,22 @@
 <?php
-
+/**
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
+ */
 
 namespace DataWash\Entity;
 
-
 use Common\Lib\Collection;
 
+/**
+ * Class PessoaFisica
+ *
+ * @author Kaue Rodrigues <kauemsc@gmail.com>
+ *
+ * @package DataWash\Entity
+ */
 class PessoaFisica
 {
     use TPessoa;
@@ -64,6 +75,9 @@ class PessoaFisica
      */
     protected $beneficio;
 
+    /**
+     * PessoaFisica constructor.
+     */
     public function __construct()
     {
         $this->partipacoes = new Collection();
@@ -79,10 +93,12 @@ class PessoaFisica
 
     /**
      * @param int $cpf
+     * @return PessoaFisica
      */
     public function setCpf($cpf)
     {
         $this->cpf = $cpf;
+        return $this;
     }
 
     /**
@@ -95,10 +111,12 @@ class PessoaFisica
 
     /**
      * @param string $nome
+     * @return PessoaFisica
      */
     public function setNome($nome)
     {
         $this->nome = $nome;
+        return $this;
     }
 
     /**
@@ -111,10 +129,12 @@ class PessoaFisica
 
     /**
      * @param string $sexo
+     * @return PessoaFisica
      */
     public function setSexo($sexo)
     {
         $this->sexo = $sexo;
+        return $this;
     }
 
     /**
@@ -127,10 +147,12 @@ class PessoaFisica
 
     /**
      * @param \DateTime $dataNascimento
+     * @return PessoaFisica
      */
     public function setDataNascimento($dataNascimento)
     {
         $this->dataNascimento = $dataNascimento;
+        return $this;
     }
 
     /**
@@ -143,10 +165,12 @@ class PessoaFisica
 
     /**
      * @param string $nomeMae
+     * @return PessoaFisica
      */
     public function setNomeMae($nomeMae)
     {
         $this->nomeMae = $nomeMae;
+        return $this;
     }
 
     /**
@@ -159,42 +183,12 @@ class PessoaFisica
 
     /**
      * @param string $escolaridade
+     * @return PessoaFisica
      */
     public function setEscolaridade($escolaridade)
     {
         $this->escolaridade = $escolaridade;
-    }
-
-    /**
-     * @return Ocupacao
-     */
-    public function getOcupacao()
-    {
-        return $this->ocupacao;
-    }
-
-    /**
-     * @param Ocupacao $ocupacao
-     */
-    public function setOcupacao($ocupacao)
-    {
-        $this->ocupacao = $ocupacao;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBeneficio()
-    {
-        return $this->beneficio;
-    }
-
-    /**
-     * @param string $beneficio
-     */
-    public function setBeneficio($beneficio)
-    {
-        $this->beneficio = $beneficio;
+        return $this;
     }
 
     /**
@@ -207,16 +201,54 @@ class PessoaFisica
 
     /**
      * @param Collection $partipacoes
+     * @return PessoaFisica
      */
     public function setPartipacoes($partipacoes)
     {
         $this->partipacoes = $partipacoes;
+        return $this;
+    }
+
+    /**
+     * @return Ocupacao
+     */
+    public function getOcupacao()
+    {
+        return $this->ocupacao;
+    }
+
+    /**
+     * @param Ocupacao $ocupacao
+     * @return PessoaFisica
+     */
+    public function setOcupacao($ocupacao)
+    {
+        $this->ocupacao = $ocupacao;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBeneficio()
+    {
+        return $this->beneficio;
+    }
+
+    /**
+     * @param string $beneficio
+     * @return PessoaFisica
+     */
+    public function setBeneficio($beneficio)
+    {
+        $this->beneficio = $beneficio;
+        return $this;
     }
 
     /**
      * @param Participacao $participacao
      */
-    public function addParticacao(Participacao $participacao)
+    public function addParticipacao(Participacao $participacao)
     {
         $this->partipacoes ?? $this->partipacoes = new Collection();
         $this->partipacoes->add($participacao);

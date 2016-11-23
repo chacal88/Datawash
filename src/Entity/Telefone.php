@@ -1,12 +1,19 @@
 <?php
-
+/**
+ * Copyright (c) 2016 , Kaue Rodrigues All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted,:
+ *
+ */
 
 namespace DataWash\Entity;
 
-
 /**
  * Class Telefone
- * @package DataWash\Model
+ *
+ * @author Kaue Rodrigues <kauemsc@gmail.com>
+ *
+ * @package DataWash\Entity
  */
 class Telefone
 {
@@ -36,10 +43,12 @@ class Telefone
 
     /**
      * @param int $numero
+     * @return Telefone
      */
     public function setNumero($numero)
     {
         $this->numero = $numero;
+        return $this;
     }
 
     /**
@@ -52,10 +61,12 @@ class Telefone
 
     /**
      * @param string $tipo
+     * @return Telefone
      */
     public function setTipo($tipo)
     {
         $this->tipo = $tipo;
+        return $this;
     }
 
     /**
@@ -68,10 +79,12 @@ class Telefone
 
     /**
      * @param int $ddd
+     * @return Telefone
      */
     public function setDdd($ddd)
     {
         $this->ddd = $ddd;
+        return $this;
     }
 
 }
